@@ -7,9 +7,9 @@ const featured=[
 {name:"Crystal-Lyrics",title:"CrystalLyrics",description:"Customizable, animated lyrics for YouTube and YouTube Music.",lang:"JavaScript",site:pages+"Crystal-Lyrics/",image:raw+"Crystal-Lyrics/main/docs/assets/launch-banner.svg",imageAlt:"Official CrystalLyrics launch banner"},
 {name:"Solstice",title:"Solstice",description:"Artwork-driven Spotify theme with synchronized lyrics and a customizable player.",lang:"JavaScript / CSS",site:pages+"Solstice/",image:raw+"Solstice/main/preview-v3.1.32.svg",imageAlt:"Official Solstice preview artwork"},
 {name:"vrchat-avatar-tagger",title:"VRChat Avatar Tagger",description:"A desktop utility for reviewing and managing your own VRChat avatar tags.",lang:"Python / Qt",site:pages+"vrchat-avatar-tagger/",image:raw+"vrchat-avatar-tagger/main/banner.png",imageAlt:"Official VRChat Avatar Tagger banner"},
-{name:"RIFT",title:"RIFT",description:"Send files, photos and links between iPhone and Mac through an animated portal.",lang:"Swift",site:pages+"RIFT/"},
-{name:"Winklet",title:"Winklet",description:"An expressive macOS desktop companion that reacts to music and power changes.",lang:"Swift / AppKit",site:pages+"Winklet/"},
-{name:"Crystal-OSINT-Hub",title:"Crystal OSINT Hub",description:"A public portfolio of online-safety research methods and responsible reporting.",lang:"Web",site:pages+"Crystal-OSINT-Hub/"}
+{name:"RIFT",title:"RIFT",description:"Send files, photos and links between iPhone and Mac through an animated portal.",lang:"Swift",site:pages+"RIFT/",image:"assets/rift.webp",imageAlt:"RIFT official website screenshot"},
+{name:"Winklet",title:"Winklet",description:"An expressive macOS desktop companion that reacts to music and power changes.",lang:"Swift / AppKit",site:pages+"Winklet/",image:"assets/winklet.webp",imageAlt:"Winklet official website screenshot"},
+{name:"Crystal-OSINT-Hub",title:"Crystal OSINT Hub",description:"A public portfolio of online-safety research methods and responsible reporting.",lang:"Web",site:pages+"Crystal-OSINT-Hub/",image:"assets/crystal-osint.webp",imageAlt:"Crystal OSINT website screenshot"}
 ];
 const known=["Solstice","Crystal-Lyrics","After-The-High","Winklet","Crystal-Wallpaper-Studio","crystal-vrc-toolkit","vrchat-avatar-tagger","Through-Every-Season","crystal-gif-pfp","Crystal-OSINT-Hub","RIFT","CRYSTAL-REMOTE-CATALOG-v1.11.0","crystaltalk"];
 const node=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e};
