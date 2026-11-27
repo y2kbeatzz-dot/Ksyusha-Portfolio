@@ -1,11 +1,11 @@
 (()=>{"use strict";
-const panel=document.querySelector("#kxSettings section");if(!panel)return;
+const panel=document.querySelector('.kx-page[aria-label="Motion"]')||document.querySelector("#kxSettings section");if(!panel)return;
 const key="ksyusha-text-effects-v1",defaults={name:"original",headings:"original",intensity:1,speed:5,color:"#00a878",enabled:true};
 let prefs={...defaults};try{Object.assign(prefs,JSON.parse(localStorage.getItem(key)||"{}"))}catch{}
 const modes={original:"Original",tech:"Tech-style lines",elastic:"Elastic-style text",foil:"Metallic foil",depth:"3D depth",glass:"Liquid Glass",gradient:"Emerald gradient",light:"Cursor lighting"};
 const wrap=document.createElement("div");wrap.className="kx-v2-controls";
 wrap.innerHTML='<h3>Text effects</h3><label>Enable text effects <input id="kxV2Enabled" type="checkbox"></label><div class="kx-v2-preview" aria-hidden="true">КСЮША.</div><label>Name <select id="kxV2Name"></select></label><label>Section headings <select id="kxV2Headings"></select></label><label>Intensity <input id="kxV2Intensity" type="range" min="0" max="2" step=".1"></label><label>Cycle duration <input id="kxV2Speed" type="range" min="2" max="15" step="1"></label><label>Effect color <input id="kxV2Color" type="color"></label><button type="button" id="kxV2Reset">Hold 2 seconds to reset text effects</button><button type="button" id="kxV2ResetAccessible">Reset text effects (confirmation)</button><p id="kxV2Status" role="status"></p>';
-panel.append(wrap);
+panel.prepend(wrap);
 const controls={enabled:wrap.querySelector("#kxV2Enabled"),name:wrap.querySelector("#kxV2Name"),headings:wrap.querySelector("#kxV2Headings"),intensity:wrap.querySelector("#kxV2Intensity"),speed:wrap.querySelector("#kxV2Speed"),color:wrap.querySelector("#kxV2Color")};
 for(const id of ["name","headings"])for(const [value,label] of Object.entries(modes))controls[id].add(new Option(label,value));
 const names=[...document.querySelectorAll(".hero h1,.hero .cyrillic"),wrap.querySelector(".kx-v2-preview")],headings=[...document.querySelectorAll(".section-head h2")],all=[...names,...headings];const reduce=matchMedia("(prefers-reduced-motion: reduce)");
