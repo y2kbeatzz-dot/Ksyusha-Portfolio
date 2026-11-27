@@ -41,6 +41,26 @@ jobs:
           if grep -nE 'getUserMedia|navigator\.mediaDevices' enhancements/src/upgrades/*.jsx; then exit 1; fi
           npm --prefix enhancements run build
           npm --prefix enhancements run build:extras
+          # Publish immutable, build-specific URLs so old browser caches cannot mix effect versions.
+          python3 - <<'PY'
+          from pathlib import Path
+          import os, re
+          root = Path('_site')
+          version = os.environ['GITHUB_SHA'][:12]
+          html = (root / 'index.html').read_text()
+          for bundle in ('enhancements', 'reviews', 'extras'):
+              for ext in ('js', 'css'):
+                  name = f'{bundle}.{ext}'
+                  source = root / name
+                  if not source.is_file() or source.stat().st_size == 0:
+                      raise SystemExit(f'Missing generated interactive bundle: {name}')
+                  target = f'{bundle}.{version}.{ext}'
+                  source.rename(root / target)
+                  html = re.sub(r'(?<=[\x22\x27])' + re.escape(name) + r'(?:\?[^\x22\x27]*)?(?=[\x22\x27])', target, html)
+                  if target not in html:
+                      raise SystemExit(f'Unreferenced interactive bundle: {target}')
+          (root / 'index.html').write_text(html)
+          PY
           touch _site/.nojekyll
           for file in _site/*.js; do node --check "$file"; done
           python3 - <<'PY'
