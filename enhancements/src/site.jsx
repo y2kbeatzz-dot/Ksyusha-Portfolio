@@ -1,3 +1,4 @@
+import GlitchText from './upgrades/GlitchText';
 import GlowCursor from './upgrades/GlowCursor.jsx';
 import HoloCard from './upgrades/HoloCard.jsx';
 import ReflectiveCard from './upgrades/ReflectiveCard.jsx';
@@ -28,3 +29,5 @@ return <><div className="kx3-folder"><FolderFloat label="Visitor reviews" sublab
 const contact=q('#contact');if(contact){const section=document.createElement('section');section.id='reviews';section.className='section';section.innerHTML='<div class="section-head"><span>06 / VISITOR REVIEWS</span><h2>What people think<span>.</span></h2><p>Public feedback, approved by the portfolio owner.</p></div>';contact.after(section);root(mount(section,'kx3-reviews')).render(<Reviews/>);const nav=q('#navlinks');if(nav){const a=document.createElement('a');a.href='#reviews';a.textContent='Reviews';nav.append(a)}}
 
 const glowHost=mount(document.body,'kx-glow-pro');glowHost.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:3';function Cursor(){const [enabled,E]=useState(false);useEffect(()=>{const tick=()=>E(!reduce.matches&&matchMedia('(pointer:fine)').matches&&!!q('#kxTrail')?.checked);tick();const t=setInterval(tick,300);return()=>clearInterval(t)},[]);return enabled?<GlowCursor color={accent()} quality="medium" maxDevicePixelRatio={1.5} style={{width:'100%',height:'100%'}}/>:null}root(glowHost).render(<Cursor/>);
+
+const textDialog=q('#kxTextEffectsDialog');if(textDialog){const h=mount(textDialog,'kx-glitch-preview');root(h).render(<GlitchText />);}
