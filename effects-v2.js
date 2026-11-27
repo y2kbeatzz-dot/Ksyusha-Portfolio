@@ -1,11 +1,16 @@
 (()=>{"use strict";
-const panel=document.querySelector('.kx-page[aria-label="Motion"]')||document.querySelector("#kxSettings section");if(!panel)return;
+const fallback=document.getElementById("kxTextEffectsDialog"),shortcut=document.getElementById("kxTextEffectsLaunch");const motionPage=()=>document.querySelector('.kx-page[aria-label="Motion"]');const panel=motionPage()||fallback?.querySelector("[data-text-host]")||document.querySelector("#kxSettings section");if(!panel)return;
 const key="ksyusha-text-effects-v1",defaults={name:"original",headings:"original",intensity:1,speed:5,color:"#00a878",enabled:true};
 let prefs={...defaults};try{Object.assign(prefs,JSON.parse(localStorage.getItem(key)||"{}"))}catch{}
 const modes={original:"Original",tech:"TechText-style",elastic:"ElasticMesh-style",foil:"Metallic foil",depth:"3D depth",glass:"Liquid Glass",gradient:"Emerald gradient",light:"Cursor lighting"};
 const wrap=document.createElement("div");wrap.className="kx-v2-controls";
 wrap.innerHTML='<h3>Text effects — choose a style</h3><p>Pick an effect for each text group. Changes preview instantly.</p><label>Enable text effects <input id="kxV2Enabled" type="checkbox"></label><div class="kx-v2-preview" aria-hidden="true">Ksyusha.</div><label>Name <select id="kxV2Name"></select></label><label>Section headings <select id="kxV2Headings"></select></label><label>Intensity <input id="kxV2Intensity" type="range" min="0" max="2" step=".1"></label><label>Cycle duration <input id="kxV2Speed" type="range" min="2" max="15" step="1"></label><label>Effect color <input id="kxV2Color" type="color"></label><button type="button" id="kxV2Reset">Hold 2 seconds to reset text effects</button><button type="button" id="kxV2ResetAccessible">Reset text effects (confirmation)</button><p id="kxV2Status" role="status"></p>';
 panel.prepend(wrap);
+function relocate(){const page=motionPage();if(page&&wrap.parentElement!==page)page.prepend(wrap)}
+if(shortcut)shortcut.addEventListener("click",()=>{relocate();const page=motionPage(),dialog=page?.closest("dialog");if(page&&dialog){const nav=dialog.querySelector(".kx-sidebar");const motion=[...nav?.querySelectorAll("button")||[]].find(b=>b.textContent.trim()==="Motion");if(!dialog.open)dialog.showModal();motion?.click();wrap.scrollIntoView({block:"nearest"});}else if(fallback){fallback.querySelector("[data-text-host]").prepend(wrap);if(!fallback.open)fallback.showModal()}});
+fallback?.querySelector("[data-text-close]")?.addEventListener("click",()=>fallback.close());
+if(!motionPage()){const observer=new MutationObserver(()=>{if(motionPage()){relocate();observer.disconnect()}});observer.observe(document.body,{childList:true,subtree:true})}
+
 const controls={enabled:wrap.querySelector("#kxV2Enabled"),name:wrap.querySelector("#kxV2Name"),headings:wrap.querySelector("#kxV2Headings"),intensity:wrap.querySelector("#kxV2Intensity"),speed:wrap.querySelector("#kxV2Speed"),color:wrap.querySelector("#kxV2Color")};
 for(const id of ["name","headings"])for(const [value,label] of Object.entries(modes))controls[id].add(new Option(label,value));
 const effectButtons={};
