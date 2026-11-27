@@ -23,6 +23,7 @@ DEFAULT = [
 custom = [normalize(x.strip()) for x in os.environ.get("REVIEW_BLOCKLIST", "").splitlines() if x.strip()]
 words = [x for x in custom if not x.startswith("user:")]
 users = {x[5:].strip().lstrip("@") for x in custom if x.startswith("user:")}
+DEFAULT.append(r'\b(?:ai|a\s*\.\s*i\.?|artificial intelligence|chatgpt|openai|claude|gemini|ai[- ]generated)\b')
 patterns = [re.compile(x, re.I) for x in DEFAULT]
 def blocked(name, body, login):
     combined = normalize(name + "\n" + body)
