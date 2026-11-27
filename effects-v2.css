@@ -45,3 +45,10 @@ body.rgb-mode .kx-v2-effect[data-kx-effect="gradient"],body.rgb-mode .hero h1.kx
 .kx-v2-effect[data-kx-effect="glitch"]:not(.hero h1),.hero h1.kx-v2-effect[data-kx-effect="glitch"]>span{animation:kx-v2-glitch var(--kx-speed,5s) steps(1,end) infinite;text-shadow:calc(2px * var(--kx-power)) 0 var(--kx-hue),calc(-2px * var(--kx-power)) 0 #cf72d8;}
 @keyframes kx-v2-glitch{0%,20%,45%,70%,100%{transform:none;text-shadow:calc(2px * var(--kx-power)) 0 var(--kx-hue),calc(-2px * var(--kx-power)) 0 #cf72d8}10%,42%,68%{transform:translateX(calc(-3px * var(--kx-power))) skewX(-5deg);text-shadow:calc(5px * var(--kx-power)) 0 var(--kx-hue),calc(-4px * var(--kx-power)) 0 #cf72d8}12%,44%,69%{transform:translateX(calc(3px * var(--kx-power)));text-shadow:calc(-3px * var(--kx-power)) 0 var(--kx-hue),calc(3px * var(--kx-power)) 0 #cf72d8}}
 @media(prefers-reduced-motion:reduce){.kx-v2-effect[data-kx-effect="glitch"],.hero h1.kx-v2-effect[data-kx-effect="glitch"]>span{animation:none!important;transform:none!important}}
+
+/* Custom text modes preserve layout and accessible original text. */
+.kx-custom-text-mounted{position:relative!important;color:transparent!important;-webkit-text-fill-color:transparent!important;text-shadow:none!important;filter:none!important;background-image:none!important;-webkit-text-stroke:0!important}
+.kx-custom-text-mounted>:not(.kx-custom-text-canvas){visibility:hidden!important}
+.kx-custom-text-mounted::before,.kx-custom-text-mounted::after{content:none!important}
+.kx-custom-text-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6;visibility:visible!important;opacity:1!important;display:block!important;transform:none!important}
+@media(prefers-reduced-motion:reduce){.kx-custom-text-mounted{color:var(--ink)!important;-webkit-text-fill-color:currentColor!important}.kx-custom-text-mounted>:not(.kx-custom-text-canvas){visibility:visible!important}.kx-custom-text-canvas{display:none!important}}
