@@ -2,7 +2,7 @@
 const reduce=matchMedia("(prefers-reduced-motion: reduce)"),q=(s,el=document)=>el.querySelector(s);
 function read(key,def){try{return {...def,...JSON.parse(localStorage.getItem(key)||"{}")}}catch{return {...def}}}
 function write(key,obj){try{localStorage.setItem(key,JSON.stringify(obj))}catch{}}
-const gallery=q("#gallery");
+try{const gallery=q("#gallery");
 if(gallery){const cards=[...gallery.querySelectorAll("button")];if(cards.length>1){
 const key="kx-carousel-v2",cfg=read(key,{speed:14,auto:true}),n=cards.length,step=360/n;let angle=0,target=null,raf=0,last=0,visible=true,over=false,drag=null,blockClick=0,velocity=0;
 gallery.classList.add("kx-cylinder");gallery.setAttribute("aria-label","Circular featured project gallery");
@@ -29,9 +29,9 @@ gallery.addEventListener("click",e=>{if(e.isTrusted&&performance.now()<blockClic
 cards.forEach((b,i)=>b.addEventListener("click",e=>{if(e.isTrusted){target=angle+norm(-i*step-angle);wake()}}));
 if("IntersectionObserver"in window)new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(!visible){cancelAnimationFrame(raf);raf=0;last=0}else wake()}).observe(gallery);
 document.addEventListener("visibilitychange",()=>{last=0;wake()});window.addEventListener("resize",render);reduce.addEventListener?.("change",wake);render();wake();
-}}
+}}}catch(error){console.warn("Project gallery:",error)}
 const host=q(".hero-main .actions");if(!host)return;
-const key="kx-digital-card-v2",prefs=read(key,{style:"holo",strap:false,shine:70});const launch=document.createElement("button");launch.type="button";launch.className="pill";launch.textContent="Digital Card ✧";host.append(launch);
+const key="kx-digital-card-v2",prefs=read(key,{style:"holo",strap:false,shine:70});const launch=document.getElementById("kxDigitalCardLaunch")||document.createElement("button");launch.type="button";launch.className="pill";launch.textContent="Digital Card ✧";if(!launch.isConnected)host.append(launch);
 const dialog=document.createElement("dialog");dialog.className="kx-card-dialog";dialog.setAttribute("aria-labelledby","kx-card-title");
 dialog.innerHTML='<div class="kx-card-head"><h2 id="kx-card-title">Digital Card</h2><button type="button" data-close>Close ×</button></div><div class="kx-card-actions"><button type="button" data-card-style="holo">Holographic</button><button type="button" data-card-style="reflective">Reflective</button></div><div class="kx-card-stage"><svg class="kx-strap" aria-hidden="true"><path fill="none" stroke="#123f31" stroke-width="19" stroke-linecap="round"/><path fill="none" stroke="#46b58b" stroke-width="11" stroke-linecap="round"/></svg><article class="kx-id-card"><small>KSYUSHA / DIGITAL ID</small><div class="kx-card-art"><img src="assets/card-art-preview.svg" alt="Anime character wearing green headphones"></div><div><div class="kx-card-name">Ксюша</div><small>DEVELOPER · DIGITAL CREATOR</small></div><div class="kx-card-bottom"><a href="https://guns.lol/life999" target="_blank" rel="noopener">Public profiles ↗</a><img src="assets/profile-qr.svg" width="65" height="65" alt="QR code for public profiles"></div></article></div><div class="kx-card-actions"><label>Show lanyard <input type="checkbox" data-strap></label><label>Shine <input type="range" min="0" max="100" data-shine></label><button type="button" data-share>Share profile</button></div><p class="kx-card-status" role="status"></p>';
 document.body.append(dialog);const stage=q(".kx-card-stage",dialog),card=q(".kx-id-card",dialog),strap=q("[data-strap]",dialog),shine=q("[data-shine]",dialog),status=q(".kx-card-status",dialog);let drag=null,raf=0,x=0,y=0,vx=0,vy=0,rx=0,ry=0;
