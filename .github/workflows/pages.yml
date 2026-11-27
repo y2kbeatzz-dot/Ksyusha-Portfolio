@@ -3,8 +3,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  issues:
+    types: [opened, edited, deleted, labeled, unlabeled, closed, reopened, transferred]
+  schedule:
+    - cron: '23 * * * *'
 permissions:
   contents: read
+  issues: read
   pages: write
   id-token: write
 concurrency:
@@ -50,6 +55,11 @@ jobs:
           for name in ('assets/character-cutout.svg', 'assets/card-art-preview.svg', 'assets/profile-qr.svg', 'experience-v2.js', 'effects-v2.js', 'elastic-mesh-site.js', 'character-reveal.js'):
               if not (root / name).is_file(): raise SystemExit('Missing feature: ' + name)
           PY
+      - name: Generate automatically moderated reviews
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW_BLOCKLIST: ${{ secrets.REVIEW_BLOCKLIST }}
+        run: python3 .github/scripts/filter_reviews.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
