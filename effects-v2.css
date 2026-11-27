@@ -20,3 +20,15 @@
 .kx-unified .kx-v2-controls{padding:12px;border:1px solid var(--line);border-radius:16px;margin:0 0 14px}.kx-v2-controls select{min-width:0;max-width:55%}.kx-v2-controls button{margin-top:8px;width:100%}
 
 .kx-v2-picker{margin:12px 0;padding:10px;min-width:0;border:1px solid var(--line);border-radius:14px}.kx-v2-picker legend{font-size:13px;font-weight:700;padding:0 6px}.kx-v2-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.kx-v2-options button{width:100%;margin:0;min-height:44px;text-align:left;white-space:normal;overflow-wrap:anywhere;background:var(--paper);border:1px solid var(--line)}.kx-v2-options button[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 22%,var(--paper));border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);font-weight:750}.kx-v2-options button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.kx-v2-controls>p{font-size:13px;color:var(--muted)}@media(min-width:700px){.kx-v2-options{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Main name uses individually rendered pixel glyphs; paint those directly. */
+.hero h1.kx-v2-effect:is([data-kx-effect="foil"],[data-kx-effect="gradient"],[data-kx-effect="glass"]){background:none!important;-webkit-text-fill-color:initial;animation:none}
+.hero h1.kx-v2-effect:is([data-kx-effect="foil"],[data-kx-effect="gradient"],[data-kx-effect="glass"])>span{background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important;text-shadow:none}
+.hero h1.kx-v2-effect[data-kx-effect="foil"]>span{background-image:linear-gradient(115deg,#30584a 5%,#b7d3c9 28%,#fff 43%,#427864 58%,#d8f4e8 75%,#30584a)!important;background-size:200% 100%!important;background-position:var(--kx-x) 50%!important}
+.hero h1.kx-v2-effect[data-kx-effect="gradient"]>span{background-image:linear-gradient(110deg,var(--kx-hue),#d1fae5,var(--ink,#163d2e),var(--kx-hue))!important;background-size:220% 100%!important;animation:kx-v2-shift var(--kx-speed) linear infinite}
+.hero h1.kx-v2-effect[data-kx-effect="glass"]>span{background-image:radial-gradient(circle at var(--kx-x) var(--kx-y),#fff,var(--kx-hue) 45%,#294d41 90%)!important;-webkit-text-stroke:.65px color-mix(in srgb,var(--kx-hue) 70%,white)}
+.hero h1.kx-v2-effect[data-kx-effect="tech"]>span{color:var(--kx-hue)!important;-webkit-text-fill-color:currentColor!important;text-shadow:0 0 10px var(--kx-hue);text-decoration:underline dashed 1px;text-underline-offset:.14em}
+.hero h1.kx-v2-effect[data-kx-effect="depth"]>span{text-shadow:0 2px #fff8,0 5px var(--kx-hue),0 9px 12px #1235}
+.hero h1.kx-v2-effect[data-kx-effect="light"]>span{text-shadow:calc(var(--kx-px,0px) * .4) calc(var(--kx-py,0px) * .4) 12px var(--kx-hue)}
+.hero h1.kx-v2-effect[data-kx-effect="elastic"]>span{transform:scale(var(--kx-scale,1)) rotate(var(--kx-dx));transition:transform .45s cubic-bezier(.2,1.55,.4,1);text-shadow:0 3px 10px var(--kx-hue)}
+@media(prefers-reduced-motion:reduce){.hero h1.kx-v2-effect>span{animation:none!important;transform:none!important;transition:none!important}}
