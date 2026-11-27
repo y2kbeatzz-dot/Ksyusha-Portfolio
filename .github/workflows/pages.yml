@@ -22,8 +22,28 @@ jobs:
       - name: Prepare static website
         run: |
           mkdir -p _site
-          cp index.html style.css app.js _site/
+          set -eu
+          cp index.html ./*.css ./*.js music.mp3 _site/
+          cp -R assets _site/assets
           touch _site/.nojekyll
+          for file in _site/*.js; do node --check "$file"; done
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          from urllib.parse import urlsplit
+          root = Path('_site')
+          class Check(HTMLParser):
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  url = a.get('src') if tag in ('script', 'img', 'audio', 'source') else a.get('href') if tag == 'link' and a.get('rel') == 'stylesheet' else None
+                  if not url: return
+                  p = urlsplit(url)
+                  if not p.scheme and not p.netloc and p.path and not (root / p.path.lstrip('/')).is_file():
+                      raise SystemExit('Missing published asset: ' + url)
+          Check().feed((root / 'index.html').read_text())
+          for name in ('assets/character-cutout.svg', 'assets/card-art-preview.svg', 'assets/profile-qr.svg', 'experience-v2.js', 'effects-v2.js', 'elastic-mesh-site.js', 'character-reveal.js'):
+              if not (root / name).is_file(): raise SystemExit('Missing feature: ' + name)
+          PY
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
