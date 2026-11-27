@@ -71,3 +71,5 @@ jobs:
           path: _site
       - uses: actions/deploy-pages@v4
         id: deployment
+
+# Redeploy requested: 2026-11-26
