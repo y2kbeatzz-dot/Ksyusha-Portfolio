@@ -253,8 +253,8 @@ void main() {
 }`;
 
 const QUALITY = {
-  low: { sim: 96, dye: 384 },
-  medium: { sim: 128, dye: 576 },
+  low: { sim: 64, dye: 256 },
+  medium: { sim: 96, dye: 384 },
   high: { sim: 160, dye: 768 }
 };
 
@@ -663,7 +663,7 @@ const GlowCursor = ({
     const burst = (s, x, y, now) => {
       const { velocity, dye } = state.targets;
       const radius = lightRadius(s);
-      const jets = 6;
+      const jets = s.quality === 'low' ? 3 : 6;
       const base = Math.random() * Math.PI * 2;
       for (let k = 0; k < jets; k++) {
         const angle = base + (k / jets) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
@@ -699,7 +699,7 @@ const GlowCursor = ({
 
         u = use(passes.pressure, pressure.read.texel);
         gl.uniform1i(u.uDivergence, bind(1, divergence));
-        for (let i = 0; i < PRESSURE_STEPS; i++) {
+        for (let i = 0; i < (s.quality === 'low' ? 6 : s.quality === 'medium' ? 12 : PRESSURE_STEPS); i++) {
           gl.uniform1i(u.uPressure, bind(0, pressure.read));
           draw(pressure.write);
           pressure.swap();
@@ -838,7 +838,7 @@ const GlowCursor = ({
       step(s, dt);
       render(s);
 
-      const quiet = now - state.active > s.linger * 1200 + 900;
+      const quiet = now - state.active > s.linger * 1200 + (s.quality === 'low' ? 350 : 900);
       const resting = Math.hypot(state.emitter.vx, state.emitter.vy) < 1;
       if (quiet && resting) {
         clearTargets();
