@@ -32,3 +32,9 @@
 .hero h1.kx-v2-effect[data-kx-effect="light"]>span{text-shadow:calc(var(--kx-px,0px) * .4) calc(var(--kx-py,0px) * .4) 12px var(--kx-hue)}
 .hero h1.kx-v2-effect[data-kx-effect="elastic"]>span{transform:scale(var(--kx-scale,1)) rotate(var(--kx-dx));transition:transform .45s cubic-bezier(.2,1.55,.4,1);text-shadow:0 3px 10px var(--kx-hue)}
 @media(prefers-reduced-motion:reduce){.hero h1.kx-v2-effect>span{animation:none!important;transform:none!important;transition:none!important}}
+
+/* Follow the same live global RGB hue; keep custom values stored underneath. */
+body.rgb-mode .kx-v2-effect{--kx-hue:var(--rgb-accent,var(--accent))!important}
+body.rgb-mode .kx-v2-effect[data-kx-effect="foil"],body.rgb-mode .hero h1.kx-v2-effect[data-kx-effect="foil"]>span{background-image:linear-gradient(115deg,color-mix(in srgb,var(--kx-hue) 55%,#142b25),var(--kx-hue) 28%,#fff 43%,color-mix(in srgb,var(--kx-hue) 80%,#244c40) 58%,color-mix(in srgb,var(--kx-hue) 35%,white) 75%,var(--kx-hue))!important}
+body.rgb-mode .kx-v2-effect[data-kx-effect="glass"],body.rgb-mode .hero h1.kx-v2-effect[data-kx-effect="glass"]>span{background-image:radial-gradient(circle at var(--kx-x) var(--kx-y),#fff,var(--kx-hue) 45%,color-mix(in srgb,var(--kx-hue) 65%,#172821) 90%)!important}
+body.rgb-mode .kx-v2-effect[data-kx-effect="gradient"],body.rgb-mode .hero h1.kx-v2-effect[data-kx-effect="gradient"]>span{background-image:linear-gradient(110deg,var(--kx-hue),color-mix(in srgb,var(--kx-hue) 28%,white),color-mix(in srgb,var(--kx-hue) 70%,#163d2e),var(--kx-hue))!important}
