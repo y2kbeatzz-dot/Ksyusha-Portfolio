@@ -35,6 +35,7 @@ jobs:
           set -eu
           cp index.html ./*.css ./*.js music.mp3 _site/
           cp -R assets _site/assets
+          npm --prefix enhancements run build:reviews
           mkdir -p enhancements/src/upgrades
           cp reactbits/*.jsx reactbits/*.css enhancements/src/upgrades/
           if grep -nE 'getUserMedia|navigator\.mediaDevices' enhancements/src/upgrades/*.jsx; then exit 1; fi
