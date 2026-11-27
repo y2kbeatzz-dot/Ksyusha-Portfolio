@@ -22,6 +22,7 @@ const targets=all.filter(e=>!e.classList.contains("kx-v2-preview"));const target
 
 /* Local canvas effects, integrated with the main picker. No Pro license required. */
 const rendered=new Map();
+const originalLabels=new Map(all.map(el=>[el,el.getAttribute("aria-label")||[...el.childNodes].map(n=>n.nodeName==="BR"?"\n":n.textContent).join("").trim()]));
 const alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+";
 function removeRendered(el){const item=rendered.get(el);if(item){item.dispose();rendered.delete(el)}}
 function mountRendered(el,mode){
@@ -30,7 +31,7 @@ function mountRendered(el,mode){
   let raf=0,points=[],lines=[],w=0,h=0,dpr=1,start=performance.now(),mx=-999,my=-999,ready=false,visible=true,last=0;
   el.append(canvas);
   const original=el.getAttribute("aria-label")||[...el.childNodes].filter(n=>n!==canvas).map(n=>n.nodeName==="BR"?"\n":n.textContent).join("");
-  const label=original.trim();
+  const label=(originalLabels.get(el)||original).trim();
   function color(){const s=getComputedStyle(el);return s.getPropertyValue("--kx-hue").trim()||s.color}
   function paintText(textLines,fill){
     ctx.fillStyle=fill;ctx.textBaseline="middle";ctx.textAlign="left";
@@ -49,7 +50,7 @@ function mountRendered(el,mode){
       const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;points=[];
       const step=Math.max(3,Math.ceil(Math.sqrt(w*h/4500)));
       for(let y=1;y<h;y+=step)for(let x=1;x<w;x+=step){const i=(Math.floor(y*dpr)*canvas.width+Math.floor(x*dpr))*4;if(data[i+3]>100)points.push({x:x+(Math.random()-.5)*190,y:y+(Math.random()-.5)*190,tx:x,ty:y})}
-      if(!points.length)return;
+      if(!points.length){ready=false;el.classList.remove("kx-custom-text-mounted");ctx.clearRect(0,0,w,h);return;}
     }
     ready=true;el.classList.add("kx-custom-text-mounted");start=performance.now();wake();
   }
