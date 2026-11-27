@@ -8,3 +8,56 @@
 .kx-tech-mounted,.kx-glitch-react-mounted{background-image:none!important;-webkit-text-stroke:0!important;text-shadow:none!important}
 .kx-tech-mounted::before,.kx-tech-mounted::after,.kx-glitch-react-mounted::before,.kx-glitch-react-mounted::after{content:none!important}
 .kx-tech-mounted>.kx-tech-host,.kx-glitch-react-mounted>.kx-glitch-react-host{visibility:visible!important;opacity:1!important}
+
+
+/* Keep the original slingshot circular and touchable on narrow review forms. */
+@media (max-width: 760px) {
+  .kx3-review-form .kx3-send {
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    padding: 12px 4px;
+    min-height: 96px;
+    min-width: 0;
+    overflow: visible;
+  }
+  .kx3-review-form .kx3-send > .sling-button {
+    justify-self: center;
+    flex: 0 0 var(--sl-size);
+    box-sizing: border-box;
+    width: var(--sl-size);
+    min-width: var(--sl-size);
+    max-width: var(--sl-size);
+    height: var(--sl-size);
+    min-height: var(--sl-size);
+    aspect-ratio: 1;
+    overflow: visible;
+    --sl-pad: color-mix(in srgb, var(--paper) 82%, var(--accent)) !important;
+    --sl-icon: var(--ink) !important;
+    --sl-well: color-mix(in srgb, var(--panel) 65%, var(--accent)) !important;
+    --sl-accent: var(--accent) !important;
+    --sl-band: color-mix(in srgb, var(--accent) 65%, var(--ink)) !important;
+  }
+  .kx3-review-form .kx3-send .sling-button__pad,
+  .kx3-review-form .kx3-send .sling-button__face {
+    box-sizing: border-box;
+    width: var(--sl-size);
+    min-width: var(--sl-size);
+    height: var(--sl-size);
+    min-height: var(--sl-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 0;
+  }
+  .kx3-review-form .kx3-send .sling-button__pad:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+  .kx3-review-form .kx3-send > span:not(.sling-button) {
+    min-width: 0;
+    font-size: 14px;
+    line-height: 1.45;
+    overflow-wrap: break-word;
+  }
+}
