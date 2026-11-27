@@ -19,12 +19,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install enhancements dependencies
+        run: npm --prefix enhancements install --no-audit --no-fund
       - name: Prepare static website
         run: |
           mkdir -p _site
           set -eu
           cp index.html ./*.css ./*.js music.mp3 _site/
           cp -R assets _site/assets
+          npm --prefix enhancements run build
           touch _site/.nojekyll
           for file in _site/*.js; do node --check "$file"; done
           python3 - <<'PY'
