@@ -1,6 +1,6 @@
 
-#kxSettings .kx-v2-controls{border-top:1px solid #72998466;margin-top:16px;padding-top:8px}
-#kxSettings .kx-v2-controls .kx-v2-preview{display:grid;place-items:center;min-height:84px;border:1px solid #72998466;border-radius:16px;background:#ffffff25;margin:10px 0;font-size:clamp(24px,5vw,42px);font-weight:800;letter-spacing:-.06em;overflow:hidden}
+.kx-v2-controls{border-top:1px solid #72998466;margin-top:16px;padding-top:8px}
+.kx-v2-controls .kx-v2-preview{display:grid;place-items:center;min-height:84px;border:1px solid #72998466;border-radius:16px;background:#ffffff25;margin:10px 0;font-size:clamp(24px,5vw,42px);font-weight:800;letter-spacing:-.06em;overflow:hidden}
 .kx-v2-effect{--kx-x:50%;--kx-y:50%;--kx-dx:0deg;--kx-dy:0deg;--kx-power:1;--kx-speed:5s;--kx-hue:#00a878}
 .kx-v2-effect[data-kx-effect="foil"],.kx-v2-effect[data-kx-effect="gradient"],.kx-v2-effect[data-kx-effect="glass"]{background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .kx-v2-effect[data-kx-effect="foil"]{background-image:linear-gradient(115deg,#30584a 5%,#b7d3c9 28%,#fff 43%,#427864 58%,#d8f4e8 75%,#30584a);background-size:200% 100%;background-position:var(--kx-x) 50%}
@@ -16,3 +16,5 @@
 #kxV2Reset:before{content:"";position:absolute;inset:0;background:#00a87844;transform:scaleX(var(--kx-hold,0));transform-origin:left;z-index:-1}
 #kxV2Status{min-height:1.5em;font-size:12px}
 @media(prefers-reduced-motion:reduce){.kx-v2-effect{animation:none!important;transform:none!important;transition:none!important}}
+
+.kx-unified .kx-v2-controls{padding:12px;border:1px solid var(--line);border-radius:16px;margin:0 0 14px}.kx-v2-controls select{min-width:0;max-width:55%}.kx-v2-controls button{margin-top:8px;width:100%}
