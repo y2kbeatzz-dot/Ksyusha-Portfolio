@@ -2,7 +2,8 @@
   "name": "ksyusha-portfolio-enhancements",
   "private": true,
   "scripts": {
-    "build": "esbuild src/site.jsx --bundle --minify --format=iife --jsx=automatic --outfile=../_site/enhancements.js"
+    "build": "esbuild src/site.jsx --bundle --minify --format=iife --jsx=automatic --outfile=../_site/enhancements.js",
+    "build:reviews": "esbuild src/reviews.jsx --bundle --minify --format=iife --jsx=automatic --outfile=../_site/reviews.js"
   },
   "dependencies": {
     "react": "19.0.0",
