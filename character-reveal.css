@@ -5,3 +5,5 @@
 .kx-character-controls{border:1px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
 .kx-character-controls select{max-width:55%}
 @media(max-width:760px){.hero-figure-host.kx-character-ready{height:auto!important;aspect-ratio:1;width:min(76vw,330px)!important}.kx-character canvas{max-height:none}}
+
+.hero-figure-host.kx-character-ready{pointer-events:auto}.kx-character .kx-character-fallback{display:block;width:100%;height:auto;max-height:100%;aspect-ratio:1;object-fit:contain}.kx-character canvas{display:none}.kx-character.kx-rendered canvas{display:block}.kx-character.kx-rendered .kx-character-fallback{display:none}.kx-character-controls button{display:block;width:100%;margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink)}
