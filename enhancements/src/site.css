@@ -33,11 +33,11 @@
     min-height: var(--sl-size);
     aspect-ratio: 1;
     overflow: visible;
-    --sl-pad: color-mix(in srgb, var(--paper) 82%, var(--accent)) !important;
-    --sl-icon: var(--ink) !important;
-    --sl-well: color-mix(in srgb, var(--panel) 65%, var(--accent)) !important;
-    --sl-accent: var(--accent) !important;
-    --sl-band: color-mix(in srgb, var(--accent) 65%, var(--ink)) !important;
+    --sl-pad: #d5f5e2 !important;
+    --sl-icon: #18181b !important;
+    --sl-well: #174735 !important;
+    --sl-accent: #00a878 !important;
+    --sl-band: #459c72 !important;
   }
   .kx3-review-form .kx3-send .sling-button__pad,
   .kx3-review-form .kx3-send .sling-button__face {
